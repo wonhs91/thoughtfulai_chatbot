@@ -47,7 +47,7 @@ def get_thoughtai_knowledge(search_query: str):
     return predefined_data
 
 # llm = ChatOllama(model="llama3.2")
-llm = ChatGroq(model_name="llama-3.3-70b-versatile")
+llm = ChatGroq(model_name="llama-3.1-8b-instant")
 
 tools = [get_thoughtai_knowledge]
 
@@ -115,13 +115,13 @@ Conversational Guidelines:
 
 Remember that your primary goal is to provide accurate, helpful information about Thoughtful AI's products while maintaining a professional and supportive interaction with users. Always use the get_thoughtai_knowledge tool to ensure accuracy in your responses about Thoughtful AI's products and services.
     """
-    messages = [SystemMessage(content=sys_msg)]
+    
     summary = state.get("summary", "")
+    
     if summary:
-        summary_message = f"Summary of conversation earlier: {summary}"
-        messages = messages + [AIMessage(content=summary_message)]
+        sys_msg = sys_msg + f"\n\nSummary of conversation earlier: {summary}"
 
-    response = llm_with_knowledge.invoke(messages + state["messages"])
+    response = llm_with_knowledge.invoke([SystemMessage(content=sys_msg)] + state["messages"])
     
     return {
         "messages": response
