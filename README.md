@@ -17,13 +17,13 @@ A CLI-based chatbot built using LangGraph, designed to interact with users and p
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/chatbot-program.git
-    cd chatbot-program
+    git clone https://github.com/wonhs91/thoughtfulai_chatbot.git
+    cd thoughtfulai_chatbot
     ```
 2. Create a virtual environment (optional but recommended):
     ```bash
     python -m venv .venv
-    source venv/bin/activate   # On Windows: venv\Scripts\activate
+    source venv/bin/activate   # On Windows: .venv\Scripts\activate
     ```
 3. Install dependencies:
     ```bash
@@ -32,7 +32,7 @@ A CLI-based chatbot built using LangGraph, designed to interact with users and p
 4. Set up the .env file:
     - Create a .env file in the root directory of the project:
     ```bash
-    touch .env
+    touch .env # Or just create a new file
     ```
     - Add the following line to the .env file:
     ```env
@@ -59,3 +59,15 @@ Agent: I'm not sure, but I can help you find that out.
 You: q
 Exiting chat. Goodbye!
 ```
+
+## Flow
+![alt text](image.png)
+1. Takes in the user input
+2. Chatbot checks if the user query is about thoguhtfulAI and/or thoughtfulAI products
+   - If so, it checks for the tool to retrieve thoughtful AI information
+   - Generate response to the user query
+3. If the message context is too long (6 messages), it summarizes the earlier messages.
+4. Respond back to the user
+
+## Improvements
+- If the predefined data is bigger, I would use embed the data then store them into a vectorstore, then let the tool retrieve data from that vectorstore.
